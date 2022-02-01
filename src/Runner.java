@@ -16,7 +16,7 @@ public class Runner {
 
 
         // create a new teacher an add it to the list of teachers
-        university.addTeacher(new Teacher("Alejandro", 1110449696, "Full Time", 2000000, 14, 48));
+        university.addTeacher(new Teacher("Alejandro Gómez", 1110449696, "Full Time", 2000000, 14, 48));
         university.addTeacher(new Teacher("Juan", 1110231231, "Full Time", 1000000, 12, 34));
         university.addTeacher(new Teacher("Maria", 10293845, "Part Time", 1200000, 10, 20));
         university.addTeacher(new Teacher("Juanito", 12343212, "Part Time", 900000, 8, 40));
