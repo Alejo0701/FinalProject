@@ -9,20 +9,18 @@ import java.util.Arrays;
 
 public class University {
 
-    private static Student[] students = new Student[0];
-    public static Teacher[] teachers = new Teacher[0];
+    private static ArrayList<Student> students = new ArrayList<Student>();
+    public static ArrayList<Teacher> teachers = new ArrayList<Teacher>();
     private static ArrayList<Course> courses = new ArrayList<Course>();
 
 
     //add a teacher to the list
     public void addTeacher(Teacher teacher) {
-        teachers = Arrays.copyOf(teachers, teachers.length + 1);
-        teachers[teachers.length - 1] = teacher;
+        this.teachers.add(teacher);
     }
 
     public void addStudent(Student student) {
-        students = Arrays.copyOf(students, students.length + 1);
-        students[students.length - 1] = student;
+        this.students.add(student);
     }
 
     public void printExistingCourses() {
@@ -58,6 +56,8 @@ public class University {
         this.courses.add(course);
         return true;
     }
+
+
 
     public Teacher getTeacherbyID(int id) {
         for (Teacher t : teachers) {
@@ -128,4 +128,19 @@ public class University {
             }
         }
     }
+
+    //enroll student in a course
+    public void enrollStudentInCourse(String courseName, Student student) {
+        Course course = getCoursebyName(courseName);
+        if (course != null) {
+            course.setCourseStudent(student);
+        }
+        else {
+            System.out.println("Course not found");
+        }
+    }
+
+
+
+
 }

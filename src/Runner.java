@@ -17,16 +17,16 @@ public class Runner {
 
         // create a new teacher an add it to the list of teachers
         university.addTeacher(new Teacher("Alejandro Gómez", 1110449696, "Full Time", 2000000, 14, 48));
-        university.addTeacher(new Teacher("Juan", 1110231231, "Full Time", 1000000, 12, 34));
-        university.addTeacher(new Teacher("Maria", 10293845, "Part Time", 1200000, 10, 20));
-        university.addTeacher(new Teacher("Juanito", 12343212, "Part Time", 900000, 8, 40));
+        university.addTeacher(new Teacher("Juan Solorzano", 1110231231, "Full Time", 1000000, 12, 34));
+        university.addTeacher(new Teacher("Maria Gutierrez", 10293845, "Part Time", 1200000, 10, 20));
+        university.addTeacher(new Teacher("Juanito Perez", 12343212, "Part Time", 900000, 8, 40));
 
-        university.addStudent(new Student("Juan", 11111, "4"));
-        university.addStudent(new Student("Maria", 22222, "3"));
-        university.addStudent(new Student("Juanito", 33333, "2"));
-        university.addStudent(new Student("Alejandro", 44444, "1"));
-        university.addStudent(new Student("Jorge", 55555, "4"));
-        university.addStudent(new Student("Martina", 66666, "3"));
+        university.addStudent(new Student("Juan Reyes", 11111, "4"));
+        university.addStudent(new Student("Maria Perez", 22222, "3"));
+        university.addStudent(new Student("Jorge Albertano", 33333, "2"));
+        university.addStudent(new Student("Manuel Cuero", 44444, "1"));
+        university.addStudent(new Student("Jaime Cruz", 55555, "4"));
+        university.addStudent(new Student("Martina Mendez", 66666, "3"));
 
         System.out.println("Welcome to the class management system");
 
@@ -83,15 +83,41 @@ public class Runner {
 
                 case 3:
                     System.out.println("Create new Student and add to a course");
+
+                    System.out.println("\nEnter the student's name: ");
+                    String name = scan.next();
+                    int StudentID = askStudentID();
+                    Student studentToValidate = university.getStudentbyID(StudentID);
+                    while (studentToValidate != null) {
+                        System.out.println("\nA student with that ID already exists. Please enter a different ID: ");
+                        StudentID = askStudentID();
+                        studentToValidate = university.getStudentbyID(StudentID);
+                        //studentToValidate
+                        //Naming
+                    }
+
+                    System.out.println("Enter the student's level: ");
+                    String level = scan.nextLine();
+                    System.out.println(name);
+                    Student studentToCreate = new Student(name, StudentID, level);
+                    university.addStudent(studentToCreate);
+                    System.out.println("Courses:");
+                    university.printExistingCourses();
+                    System.out.println("\nSelect a course to add the student to: ");
+                    int courseId = scan.nextInt();
+                    String courseName = courseName(courseId);
+                    university.enrollStudentInCourse(courseName, studentToCreate);
+
                     pressEnterToContinue();
                     break;
+
 
 
                 case 4:
                     System.out.println("Create new Course with a teacher and add students");
 
                     System.out.println("Enter the name of the course: ");
-                    String courseName = scan.next();
+                    String courseNametoCreate = scan.next();
 
                     System.out.println("Enter id Class Room assigned: ");
                     String classRoomId = scan.next();
@@ -103,6 +129,7 @@ public class Runner {
                     while (teacher == null) {
                         System.out.println("Teacher not found, please enter a valid id");
                         teacherId = askTeacherId();
+                        System.out.println(teacherId);
                         teacher = university.getTeacherbyID(teacherId);
                     }
                     /*if (teacher == null) {
@@ -128,7 +155,7 @@ public class Runner {
                         }
                     }
 
-                    university.createNewCourse(courseName, classRoomId, teacher, students);
+                    university.createNewCourse(courseNametoCreate, classRoomId, teacher, students);
                     pressEnterToContinue();
                     break;
 
@@ -180,6 +207,13 @@ public class Runner {
         String courseName = searchInUniversity.getCourseNameByPosition(courseId);
         return courseName;
 
+    }
+
+    public static int askStudentID(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter the id of the student: ");
+        int studentId = scan.nextInt();
+        return studentId;
     }
 
 

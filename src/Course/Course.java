@@ -10,7 +10,7 @@ public class Course {
     private String courseName;
     private String classRoom;
     private Teacher teacher;
-    private ArrayList<Student> courseStudents = new ArrayList<>();
+    private ArrayList<Student> courseStudents = new ArrayList<Student>();
 
     public Course(String courseName, String classRoom, Teacher teacher, ArrayList<Student> courseStudents) {
         this.courseName = courseName;

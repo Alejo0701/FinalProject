@@ -1,14 +1,16 @@
 package Person;
 
+import java.text.DecimalFormat;
+
 public class Teacher extends Person {
 
     private String type;
-    private double baseSalary;
+    private int baseSalary;
     private int yearsOfExperience;
     private int activeHoursPerWeek;
 
 
-    public Teacher(String name, int id, String type, double baseSalary, int yearsOfExperience, int activeHoursPerWeek) {
+    public Teacher(String name, int id, String type, int baseSalary, int yearsOfExperience, int activeHoursPerWeek) {
         super(name, id);
         this.type = type;
         this.baseSalary = baseSalary;
@@ -24,11 +26,11 @@ public class Teacher extends Person {
         this.type = type;
     }
 
-    public double getBaseSalary() {
+    public int getBaseSalary() {
         return baseSalary;
     }
 
-    public void setBaseSalary(double baseSalary) {
+    public void setBaseSalary(int baseSalary) {
         this.baseSalary = baseSalary;
     }
 
@@ -48,23 +50,25 @@ public class Teacher extends Person {
         this.activeHoursPerWeek = activeHoursPerWeek;
     }
 
-    public double getSalaryCalculated() {
-        double salary = 0;
-        if (this.type.equals("Full time")) {
-            salary = this.baseSalary * (this.yearsOfExperience * 1.10);
+    public int getSalaryCalculated() {
+        int salary = 0;
+        if (this.type.equals("Full Time")) {
+            salary = (int) (this.baseSalary * (this.yearsOfExperience * 1.10));
         } else {
-            salary = this.baseSalary * this.activeHoursPerWeek;
+            salary = (int) (this.baseSalary * this.activeHoursPerWeek);
         }
         return salary;
     }
 
     //show teacher info
     public String TeacherInfo() {
+        DecimalFormat df = new DecimalFormat("###,###,###");
         String str = "";
         str += "Name: " + this.getName() + "\n";
         str += "ID: " + this.getId() + "\n";
         str += "Type: " + this.getType() + "\n";
-        str += "Base salary: $" + this.getBaseSalary() + "\n";
+        str += "Base salary: $" + df.format(this.getBaseSalary()) + "\n";
+        str += "Total salary: $" + df.format(this.getSalaryCalculated()) + "\n";
         str += "Years of experience: " + this.getYearsOfExperience() + " years \n";
         str += "Active hours per week: " + this.getActiveHoursPerWeek() + " hours \n";
         return str;
