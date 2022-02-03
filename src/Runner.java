@@ -1,4 +1,3 @@
-import Data.Course.Course;
 import Data.Person.*;
 import Data.University.*;
 
@@ -19,13 +18,6 @@ public class Runner {
         university.addTeacher(new Teacher("Maria Gutierrez", "Part Time", 1200000, 10, 20));
         university.addTeacher(new Teacher("Juanito Perez", "Part Time", 900000, 8, 40));
 
-        /*university.addStudent(new Student("Juan Reyes", university.generateID(), "4"));
-        university.addStudent(new Student("Maria Perez", university.generateID(), "3"));
-        university.addStudent(new Student("Jorge Albertano", university.generateID(), "2"));
-        university.addStudent(new Student("Manuel Cuero", university.generateID(), "1"));
-        university.addStudent(new Student("Jaime Cruz", university.generateID(), "4"));
-        university.addStudent(new Student("Martina Mendez", university.generateID(), "3"));*/
-
         university.addStudent(new Student("Juan Reyes","4"));
         university.addStudent(new Student("Maria Perez","3"));
         university.addStudent(new Student("Jorge Albertano","2"));
@@ -33,20 +25,17 @@ public class Runner {
         university.addStudent(new Student("Jaime Cruz","4"));
         university.addStudent(new Student("Martina Mendez", "3"));
 
-        ArrayList<Student> list1 = new ArrayList<Student>();
-        //fill the list with students from the university
+        ArrayList<Student> list1 = new ArrayList<>();
         list1.add(university.getStudentbyID(5));
         list1.add(university.getStudentbyID(6));
         list1.add(university.getStudentbyID(7));
 
-        ArrayList<Student> list2 = new ArrayList<Student>();
+        ArrayList<Student> list2 = new ArrayList<>();
         list2.add(university.getStudentbyID(8));
         list2.add(university.getStudentbyID(9));
         list2.add(university.getStudentbyID(10));
 
 
-
-        //create a new course and add it to the list of courses
 
         university.createNewCourse("Java", "201A",university.getTeacherbyID(1),list1);
         university.createNewCourse("PHP101", "201B",university.getTeacherbyID(3), list2);
@@ -94,7 +83,7 @@ public class Runner {
                             boolean courseIDValidation = false;
                             String name = courseName(courseId);
                             while (!courseIDValidation) {
-                                if (name == "The course id is not valid") {
+                                if (name.equals("The course id is not valid") ) {
                                     System.out.println(name);
                                     System.out.println("Please enter a valid course ID: ");
                                     courseId = scan.nextInt();
@@ -147,8 +136,6 @@ public class Runner {
                     System.out.println("Enter the name of Class Room assigned: ");
                     String classRoomId = scan.next();
 
-                    /*System.out.println("Enter the id of the teacher: ");
-                    int teacherId = scan.nextInt();*/
                     int teacherId= askTeacherId();
                     Teacher teacher = university.getTeacherbyID(teacherId);
                     while (teacher == null) {
@@ -236,8 +223,7 @@ public class Runner {
     public static int askTeacherId(){
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter the id of the teacher: ");
-        int teacherId = scan.nextInt();
-        return teacherId;
+        return scan.nextInt();
     }
 
     public static String courseName(int courseId){
