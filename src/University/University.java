@@ -12,6 +12,8 @@ public class University {
     private static ArrayList<Student> students = new ArrayList<Student>();
     public static ArrayList<Teacher> teachers = new ArrayList<Teacher>();
     private static ArrayList<Course> courses = new ArrayList<Course>();
+    private static int counter = 1;
+    private int idToGenerate;
 
 
     //add a teacher to the list
@@ -30,7 +32,7 @@ public class University {
         }
         if (courses.size() > 0) {
             for (Course course : courses) {
-                    System.out.println(i + " - " + course.getCourseName());
+                    System.out.println(i + " - " + course.getCourseName()+ " - " + courses.indexOf(course));
                     i++;
             }
         }
@@ -82,9 +84,10 @@ public class University {
             if (c.getCourseName().equals(name)) {
                 return c;
             }
-            else {
-                System.out.println("Course not found");
-            }
+            /*else {
+                //System.out.println("Course not found");
+                System.out.println("getCoursebyName");
+            }*/
         }
         return null;
     }
@@ -93,40 +96,38 @@ public class University {
 
     public String getCourseNameByPosition(int position) {
         position--;
+        String strcourse = "Course not found";
+
         if (position > courses.size()) {
-            System.out.println("There is no courses");
+            strcourse = "There is no courses";
         }
         else {
             for (Course c : courses) {
                 if (c.getCourseName().equals(courses.get(position).getCourseName())) {
-                    return c.getCourseName();
-                }
-                else {
-                    return "Course not found";
+                    strcourse = c.getCourseName();
                 }
             }
         }
-        return null;
+        return strcourse;
     }
 
     //show course info
-    public void showCourseInfo(String courseName) {
+    public String showCourseInfo(String courseName) {
+        String strcourse = "";
         for (Course c : courses) {
             if (c.getCourseName().equals(courseName)) {
-                String strcourse = "";
-                strcourse += "Course name: " + c.getCourseName() + "\n";
+                //course position
+                strcourse += "Course position: " + courses.indexOf(c) + "\n";
+                strcourse += "Course name: " + courseName + "\n";
                 strcourse += "Class room: " + c.getClassRoom() + "\n";
                 strcourse += "Teacher: " + c.getTeacher().getName() + "\n";
                 strcourse += "Students: " + "\n";
                 for (Student s : c.getCourseStudents()) {
                     strcourse += s.getName() + "\n";
                 }
-                System.out.println(strcourse);
-            }
-            else {
-                System.out.println("Course not found");
             }
         }
+        return strcourse;
     }
 
     //enroll student in a course
@@ -136,8 +137,28 @@ public class University {
             course.setCourseStudent(student);
         }
         else {
-            System.out.println("Course not found");
+            //System.out.println("Course not found");
+            System.out.println("enrollStudentInCourse");
         }
+    }
+
+    //List all courses from a student
+    public void listAllCoursesFromStudent(Student student) {
+        String strcourses = "";
+        System.out.println(student.getName() + "\n");
+        for (Course c : courses) {
+            if (c.getCourseStudents().contains(student)) {
+                strcourses += c.getCourseName() + "\n";
+            }
+        }
+        System.out.println(strcourses);
+    }
+
+    //ID generator
+    public int generateID() {
+       idToGenerate = counter;
+       counter++;
+       return idToGenerate;
     }
 
 

@@ -16,17 +16,38 @@ public class Runner {
 
 
         // create a new teacher an add it to the list of teachers
-        university.addTeacher(new Teacher("Alejandro Gómez", 1110449696, "Full Time", 2000000, 14, 48));
-        university.addTeacher(new Teacher("Juan Solorzano", 1110231231, "Full Time", 1000000, 12, 34));
-        university.addTeacher(new Teacher("Maria Gutierrez", 10293845, "Part Time", 1200000, 10, 20));
-        university.addTeacher(new Teacher("Juanito Perez", 12343212, "Part Time", 900000, 8, 40));
+        university.addTeacher(new Teacher("Alejandro Gómez", university.generateID(), "Full Time", 2000000, 14, 48));
+        university.addTeacher(new Teacher("Juan Solorzano", university.generateID(), "Full Time", 1000000, 12, 34));
+        university.addTeacher(new Teacher("Maria Gutierrez", university.generateID(), "Part Time", 1200000, 10, 20));
+        university.addTeacher(new Teacher("Juanito Perez", university.generateID(), "Part Time", 900000, 8, 40));
 
-        university.addStudent(new Student("Juan Reyes", 11111, "4"));
-        university.addStudent(new Student("Maria Perez", 22222, "3"));
-        university.addStudent(new Student("Jorge Albertano", 33333, "2"));
-        university.addStudent(new Student("Manuel Cuero", 44444, "1"));
-        university.addStudent(new Student("Jaime Cruz", 55555, "4"));
-        university.addStudent(new Student("Martina Mendez", 66666, "3"));
+        university.addStudent(new Student("Juan Reyes", university.generateID(), "4"));
+        university.addStudent(new Student("Maria Perez", university.generateID(), "3"));
+        university.addStudent(new Student("Jorge Albertano", university.generateID(), "2"));
+        university.addStudent(new Student("Manuel Cuero", university.generateID(), "1"));
+        university.addStudent(new Student("Jaime Cruz", university.generateID(), "4"));
+        university.addStudent(new Student("Martina Mendez", university.generateID(), "3"));
+
+        ArrayList<Student> list1 = new ArrayList<Student>();
+        //fill the list with students from the university
+        list1.add(university.getStudentbyID(5));
+        list1.add(university.getStudentbyID(6));
+        list1.add(university.getStudentbyID(7));
+
+        ArrayList<Student> list2 = new ArrayList<Student>();
+        list2.add(university.getStudentbyID(8));
+        list2.add(university.getStudentbyID(9));
+        list2.add(university.getStudentbyID(10));
+
+
+
+        //create a new course and add it to the list of courses
+
+        university.createNewCourse("Java", "201A",university.getTeacherbyID(1),list1);
+        university.createNewCourse("PHP101", "201B",university.getTeacherbyID(3), list2);
+        university.createNewCourse("C #101", "201C",university.getTeacherbyID(1), list2);
+        university.createNewCourse("Python 101", "201D",university.getTeacherbyID(3), list1);
+
 
         System.out.println("Welcome to the class management system");
 
@@ -60,9 +81,11 @@ public class Runner {
                     while (!backToMenu) {
                         System.out.println("\nSelect a course to see its information: ");
                         int courseId = scan.nextInt();
+                        System.out.println(courseId);
                         String name = courseName(courseId);
+                        System.out.println(name);
                         if (name != null || !name.equals("Course not found")) {
-                            university.showCourseInfo(name);
+                            System.out.println(university.showCourseInfo(name));
                         }
                         System.out.println("\n1. Back to menu");
                         System.out.println("2. Exit");
@@ -162,6 +185,15 @@ public class Runner {
 
                 case 5:
                     System.out.println("List all courses of a Student");
+                    System.out.println("Enter the DNI of the student: ");
+                    int studentId = scan.nextInt();
+                    Student student = university.getStudentbyID(studentId);
+                    if (student == null) {
+                        System.out.println("Student not found");
+                    }
+                    else {
+                        university.listAllCoursesFromStudent(student);
+                    }
                     pressEnterToContinue();
                     break;
 
@@ -205,7 +237,11 @@ public class Runner {
     public static String courseName(int courseId){
         University searchInUniversity = new University();
         String courseName = searchInUniversity.getCourseNameByPosition(courseId);
-        return courseName;
+        if (courseName == null){
+            return "Course not found";
+        }else {
+            return courseName;
+        }
 
     }
 
