@@ -14,17 +14,24 @@ public class Runner {
 
 
         // create a new teacher an add it to the list of teachers
-        university.addTeacher(new Teacher("Alejandro Gómez", university.generateID(), "Full Time", 2000000, 14, 48));
-        university.addTeacher(new Teacher("Juan Solorzano", university.generateID(), "Full Time", 1000000, 12, 34));
-        university.addTeacher(new Teacher("Maria Gutierrez", university.generateID(), "Part Time", 1200000, 10, 20));
-        university.addTeacher(new Teacher("Juanito Perez", university.generateID(), "Part Time", 900000, 8, 40));
+        university.addTeacher(new Teacher("Alejandro Gómez", "Full Time", 2000000, 14, 48));
+        university.addTeacher(new Teacher("Juan Solorzano","Full Time", 1000000, 12, 34));
+        university.addTeacher(new Teacher("Maria Gutierrez", "Part Time", 1200000, 10, 20));
+        university.addTeacher(new Teacher("Juanito Perez", "Part Time", 900000, 8, 40));
 
-        university.addStudent(new Student("Juan Reyes", university.generateID(), "4"));
+        /*university.addStudent(new Student("Juan Reyes", university.generateID(), "4"));
         university.addStudent(new Student("Maria Perez", university.generateID(), "3"));
         university.addStudent(new Student("Jorge Albertano", university.generateID(), "2"));
         university.addStudent(new Student("Manuel Cuero", university.generateID(), "1"));
         university.addStudent(new Student("Jaime Cruz", university.generateID(), "4"));
-        university.addStudent(new Student("Martina Mendez", university.generateID(), "3"));
+        university.addStudent(new Student("Martina Mendez", university.generateID(), "3"));*/
+
+        university.addStudent(new Student("Juan Reyes","4"));
+        university.addStudent(new Student("Maria Perez","3"));
+        university.addStudent(new Student("Jorge Albertano","2"));
+        university.addStudent(new Student("Manuel Cuero", "1"));
+        university.addStudent(new Student("Jaime Cruz","4"));
+        university.addStudent(new Student("Martina Mendez", "3"));
 
         ArrayList<Student> list1 = new ArrayList<Student>();
         //fill the list with students from the university
@@ -111,12 +118,11 @@ public class Runner {
 
                     System.out.println("\nEnter the student's name: ");
                     String name = scan.next();
-                    int StudentID = university.generateID();
-
                     System.out.println("Enter the student's level : ");
                     String level = scan.next();
                     System.out.println(name);
-                    Student studentToCreate = new Student(name, StudentID, level);
+                    //Student studentToCreate = new Student(name, StudentID, level);
+                    Student studentToCreate = new Student(name, level);
                     System.out.println("Student created");
                     System.out.println(studentToCreate.showStudentInfo());
                     university.addStudent(studentToCreate);

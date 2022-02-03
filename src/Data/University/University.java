@@ -11,8 +11,6 @@ public class University {
     private static ArrayList<Student> students = new ArrayList<Student>();
     public static ArrayList<Teacher> teachers = new ArrayList<Teacher>();
     private static ArrayList<Course> courses = new ArrayList<Course>();
-    private static int counter = 1;
-    private int idToGenerate;
 
 
     //add a teacher to the list
@@ -78,7 +76,7 @@ public class University {
         return null;
     }
 
-    public Course getCoursebyName(String name) {
+        public Course getCoursebyName(String name) {
         for (Course c : courses) {
             if (c.getCourseName().equals(name)) {
                 return c;
@@ -111,7 +109,6 @@ public class University {
         return strcourse;
     }
 
-    //show course info
     public String showCourseInfo(String courseName) {
         String strcourse = "";
         for (Course c : courses) {
@@ -129,7 +126,6 @@ public class University {
         return strcourse;
     }
 
-    //enroll student in a course
     public void enrollStudentInCourse(String courseName, Student student) {
         Course course = getCoursebyName(courseName);
         if (course != null) {
@@ -141,7 +137,6 @@ public class University {
         }
     }
 
-    //List all courses from a student
     public void listAllCoursesFromStudent(Student student) {
         String strcourses = "";
         System.out.println(student.getName() + "\n");
@@ -151,13 +146,6 @@ public class University {
             }
         }
         System.out.println(strcourses);
-    }
-
-    //ID generator
-    public int generateID() {
-       idToGenerate = counter;
-       counter++;
-       return idToGenerate;
     }
 
     public int coursesSize() {

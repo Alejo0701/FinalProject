@@ -10,8 +10,8 @@ public class Teacher extends Person {
     private int activeHoursPerWeek;
 
 
-    public Teacher(String name, int id, String type, int baseSalary, int yearsOfExperience, int activeHoursPerWeek) {
-        super(name, id);
+    public Teacher(String name, String type, int baseSalary, int yearsOfExperience, int activeHoursPerWeek) {
+        super(name);
         this.type = type;
         this.baseSalary = baseSalary;
         this.yearsOfExperience = yearsOfExperience;
@@ -60,7 +60,6 @@ public class Teacher extends Person {
         return salary;
     }
 
-    //show teacher info
     public String TeacherInfo() {
         DecimalFormat df = new DecimalFormat("###,###,###");
         String str = "";

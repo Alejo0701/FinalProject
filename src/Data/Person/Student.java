@@ -4,8 +4,8 @@ public class Student extends Person {
 
     private String level;
 
-    public Student(String name, int id, String level) {
-        super(name, id);
+    public Student(String name, String level) {
+        super(name);
         this.level = level;
     }
 
@@ -18,7 +18,6 @@ public class Student extends Person {
         this.level = level;
     }
 
-    //show student info
     public String showStudentInfo(){
         String data = "";
         data += "Student: " + getName() + "\n";
