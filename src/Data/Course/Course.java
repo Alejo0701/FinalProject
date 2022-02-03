@@ -1,7 +1,7 @@
-package Course;
+package Data.Course;
 
-import Person.Student;
-import Person.Teacher;
+import Data.Person.Student;
+import Data.Person.Teacher;
 
 import java.util.ArrayList;
 
@@ -64,7 +64,7 @@ public class Course {
 
     //show an specific course info
     public void showCourseInfoByName(Course course){
-        System.out.println("Course name: " + course.getCourseName());
+        System.out.println("Data.Course name: " + course.getCourseName());
         System.out.println("Class room: " + course.getClassRoom());
         System.out.println("Teacher: " + course.getTeacher().getName());
         System.out.println("Students: ");

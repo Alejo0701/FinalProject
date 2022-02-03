@@ -1,11 +1,10 @@
-package University;
+package Data.University;
 
-import Course.Course;
-import Person.Student;
-import Person.Teacher;
+import Data.Course.Course;
+import Data.Person.Student;
+import Data.Person.Teacher;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class University {
 
@@ -41,7 +40,7 @@ public class University {
     public boolean createNewCourse(String courseName, String classRoom, Teacher teacher, ArrayList<Student> students) {
 
         if (courseName.equals("")) {
-            System.out.println("Course name is empty");
+            System.out.println("Data.Course name is empty");
             return false;
         }
         if (classRoom.equals("")) {
@@ -84,10 +83,6 @@ public class University {
             if (c.getCourseName().equals(name)) {
                 return c;
             }
-            /*else {
-                //System.out.println("Course not found");
-                System.out.println("getCoursebyName");
-            }*/
         }
         return null;
     }
@@ -95,13 +90,18 @@ public class University {
 
 
     public String getCourseNameByPosition(int position) {
-        position--;
+
         String strcourse = "Course not found";
 
-        if (position > courses.size()) {
-            strcourse = "There is no courses";
+        if (courses.size() == 0) {
+            strcourse = "There are no courses";
         }
-        else {
+
+        if (position > courses.size()) {
+            strcourse = "The course id is not valid";
+        }
+        if (position <= courses.size()) {
+            position--;
             for (Course c : courses) {
                 if (c.getCourseName().equals(courses.get(position).getCourseName())) {
                     strcourse = c.getCourseName();
@@ -117,8 +117,8 @@ public class University {
         for (Course c : courses) {
             if (c.getCourseName().equals(courseName)) {
                 //course position
-                strcourse += "Course position: " + courses.indexOf(c) + "\n";
-                strcourse += "Course name: " + courseName + "\n";
+                strcourse += "Data.Course position: " + courses.indexOf(c) + "\n";
+                strcourse += "Data.Course name: " + courseName + "\n";
                 strcourse += "Class room: " + c.getClassRoom() + "\n";
                 strcourse += "Teacher: " + c.getTeacher().getName() + "\n";
                 strcourse += "Students: " + "\n";
@@ -137,7 +137,7 @@ public class University {
             course.setCourseStudent(student);
         }
         else {
-            //System.out.println("Course not found");
+            //System.out.println("Data.Course not found");
             System.out.println("enrollStudentInCourse");
         }
     }
@@ -159,6 +159,10 @@ public class University {
        idToGenerate = counter;
        counter++;
        return idToGenerate;
+    }
+
+    public int coursesSize() {
+        return courses.size();
     }
 
 

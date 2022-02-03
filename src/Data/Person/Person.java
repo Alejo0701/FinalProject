@@ -1,4 +1,4 @@
-package Person;
+package Data.Person;
 
 public class Person {
 

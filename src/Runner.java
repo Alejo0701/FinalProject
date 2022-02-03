@@ -1,11 +1,9 @@
-import Course.Course;
-import Person.*;
-import University.*;
+import Data.Course.Course;
+import Data.Person.*;
+import Data.University.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import static University.University.*;
 
 public class Runner {
 
@@ -60,7 +58,7 @@ public class Runner {
             System.out.println("1. Print teachers information");
             System.out.println("2. Print Courses");
             System.out.println("3. Create new Student and add to a course");
-            System.out.println("4. Create new Course with a teacher and add students");
+            System.out.println("4. Create new Data.Course with a teacher and add students");
             System.out.println("5. List all courses of a Student");
             System.out.println("6. Exit");
             System.out.println("\nEnter your choice: ");
@@ -77,27 +75,19 @@ public class Runner {
                 case 2:
                     System.out.println("Courses:");
                     university.printExistingCourses();
+                    //get size of courses array
+                    System.out.println(university.coursesSize());
                     boolean backToMenu = false;
                     while (!backToMenu) {
-                        System.out.println("\nSelect a course to see its information: ");
+                        System.out.println("\nEnter the course ID to see the information of the course: ");
                         int courseId = scan.nextInt();
                         System.out.println(courseId);
                         String name = courseName(courseId);
-                        System.out.println(name);
                         if (name != null || !name.equals("Course not found")) {
                             System.out.println(university.showCourseInfo(name));
-                        }
-                        System.out.println("\n1. Back to menu");
-                        System.out.println("2. Exit");
-                        System.out.println("\nEnter your choice: ");
-                        int choice2 = scan.nextInt();
-                        switch (choice2) {
-                            case 1:
-                                backToMenu = true;
-                                break;
-                            case 2:
-                                continueToRun = false;
-                                break;
+                            backToMenu = true;
+                        } else {
+                            System.out.println("Course not found");
                         }
                     }
                     pressEnterToContinue();
@@ -110,16 +100,8 @@ public class Runner {
                     System.out.println("\nEnter the student's name: ");
                     String name = scan.next();
                     int StudentID = university.generateID();
-                    /*Student studentToValidate = university.getStudentbyID(StudentID);
-                    while (studentToValidate != null) {
-                        System.out.println("\nA student with that ID already exists. Please enter a different ID: ");
-                        StudentID = askStudentID();
-                        studentToValidate = university.getStudentbyID(StudentID);
-                        //studentToValidate
-                        //Naming
-                    }*/
 
-                    System.out.println("Enter the student's level: ");
+                    System.out.println("Enter the student's level : ");
                     String level = scan.next();
                     System.out.println(name);
                     Student studentToCreate = new Student(name, StudentID, level);
@@ -139,7 +121,7 @@ public class Runner {
 
 
                 case 4:
-                    System.out.println("Create new Course with a teacher and add students");
+                    System.out.println("Create new Data.Course with a teacher and add students");
 
                     System.out.println("Enter the name of the course: ");
                     String courseNametoCreate = scan.next();
@@ -152,27 +134,33 @@ public class Runner {
                     int teacherId= askTeacherId();
                     Teacher teacher = university.getTeacherbyID(teacherId);
                     while (teacher == null) {
-                        System.out.println("Teacher not found, please enter a valid id");
+                        System.out.println("Teacher not found, please enter a valid ID");
                         teacherId = askTeacherId();
                         System.out.println(teacherId);
                         teacher = university.getTeacherbyID(teacherId);
                     }
-                    /*if (teacher == null) {
-                        System.out.println("Teacher not found");
-                        break;
-                    }*/
+
                     ArrayList<Student> students = new ArrayList<>();
                     boolean addStudents = true;
 
                     while (addStudents) {
-                        System.out.println("Enter the id of the student: ");
+                        System.out.println("Enter the ID of the student: ");
                         int studentId = scan.nextInt();
                         Student student = university.getStudentbyID(studentId);
-                        if (student == null) {
-                            System.out.println("Student not found");
-                        }else{
-                            students.add(student);
+                        boolean askStudentID = true;
+                        while (askStudentID) {
+                            if (student == null) {
+                                System.out.println("Student not found, please enter a valid ID");
+                                System.out.println("Enter the ID of the student: ");
+                                studentId = scan.nextInt();
+                            }
+                            student = university.getStudentbyID(studentId);
+                            if (student != null) {
+                                askStudentID = false;
+                            }
                         }
+                        students.add(student);
+
                         System.out.println("Do you want to add more students? (y/n)");
                         String answer = scan.next();
                         if (answer.equals("n")) {
@@ -187,7 +175,7 @@ public class Runner {
 
                 case 5:
                     System.out.println("List all courses of a Student");
-                    System.out.println("Enter the DNI of the student: ");
+                    System.out.println("Enter the ID of the student: ");
                     int studentId = scan.nextInt();
                     Student student = university.getStudentbyID(studentId);
                     if (student == null) {
@@ -208,6 +196,7 @@ public class Runner {
 
                 default:
                     System.out.println("Invalid choice");
+                    pressEnterToContinue();
                     break;
             }
 
@@ -219,7 +208,6 @@ public class Runner {
             System.out.println(teacher.TeacherInfo());        }
     }
 
-    //press enter to continue and clear the screen
     public static void pressEnterToContinue(){
         Scanner scan = new Scanner(System.in);
         System.out.println("Press enter to continue");
@@ -228,7 +216,6 @@ public class Runner {
         System.out.flush();
     }
 
-    //ask teacher id
     public static int askTeacherId(){
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter the id of the teacher: ");
@@ -245,13 +232,6 @@ public class Runner {
             return courseName;
         }
 
-    }
-
-    public static int askStudentID(){
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Enter the id of the student: ");
-        int studentId = scan.nextInt();
-        return studentId;
     }
 
 
