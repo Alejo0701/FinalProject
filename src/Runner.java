@@ -8,11 +8,9 @@ public class Runner {
 
     public static void main(String[] args) {
 
-        //create a new university
         University university = new University();
 
 
-        // create a new teacher an add it to the list of teachers
         university.addTeacher(new Teacher("Alejandro Gómez", "Full Time", 2000000, 14, 48));
         university.addTeacher(new Teacher("Juan Solorzano","Full Time", 1000000, 12, 34));
         university.addTeacher(new Teacher("Maria Gutierrez", "Part Time", 1200000, 10, 20));
