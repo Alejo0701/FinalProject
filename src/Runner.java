@@ -109,20 +109,22 @@ public class Runner {
 
                     System.out.println("\nEnter the student's name: ");
                     String name = scan.next();
-                    int StudentID = askStudentID();
-                    Student studentToValidate = university.getStudentbyID(StudentID);
+                    int StudentID = university.generateID();
+                    /*Student studentToValidate = university.getStudentbyID(StudentID);
                     while (studentToValidate != null) {
                         System.out.println("\nA student with that ID already exists. Please enter a different ID: ");
                         StudentID = askStudentID();
                         studentToValidate = university.getStudentbyID(StudentID);
                         //studentToValidate
                         //Naming
-                    }
+                    }*/
 
                     System.out.println("Enter the student's level: ");
-                    String level = scan.nextLine();
+                    String level = scan.next();
                     System.out.println(name);
                     Student studentToCreate = new Student(name, StudentID, level);
+                    System.out.println("Student created");
+                    System.out.println(studentToCreate.showStudentInfo());
                     university.addStudent(studentToCreate);
                     System.out.println("Courses:");
                     university.printExistingCourses();
@@ -142,7 +144,7 @@ public class Runner {
                     System.out.println("Enter the name of the course: ");
                     String courseNametoCreate = scan.next();
 
-                    System.out.println("Enter id Class Room assigned: ");
+                    System.out.println("Enter the name of Class Room assigned: ");
                     String classRoomId = scan.next();
 
                     /*System.out.println("Enter the id of the teacher: ");
@@ -251,6 +253,8 @@ public class Runner {
         int studentId = scan.nextInt();
         return studentId;
     }
+
+
 
 
 }

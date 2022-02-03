@@ -55,7 +55,7 @@ public class Course {
         //validate if student is already in the course
         if(!courseStudents.contains(student)){
             courseStudents.add(student);
-            System.out.println("Student added to course");
+            System.out.println("Student added to course: " + courseName);
         }
         else{
             System.out.println("Student already in course");

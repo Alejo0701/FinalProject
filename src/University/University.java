@@ -123,7 +123,7 @@ public class University {
                 strcourse += "Teacher: " + c.getTeacher().getName() + "\n";
                 strcourse += "Students: " + "\n";
                 for (Student s : c.getCourseStudents()) {
-                    strcourse += s.getName() + "\n";
+                    strcourse += s.getName() + " - ID:" +s.getId() + "\n";
                 }
             }
         }

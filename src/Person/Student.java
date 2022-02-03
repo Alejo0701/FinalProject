@@ -18,5 +18,14 @@ public class Student extends Person {
         this.level = level;
     }
 
+    //show student info
+    public String showStudentInfo(){
+        String data = "";
+        data += "Student: " + getName() + "\n";
+        data += "ID: " + getId() + "\n";
+        data += "Level: " + getLevel() + "\n";
+        return data;
+    }
+
 
 }
