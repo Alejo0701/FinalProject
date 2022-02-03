@@ -116,9 +116,8 @@ public class University {
         String strcourse = "";
         for (Course c : courses) {
             if (c.getCourseName().equals(courseName)) {
-                //course position
-                strcourse += "Data.Course position: " + courses.indexOf(c) + "\n";
-                strcourse += "Data.Course name: " + courseName + "\n";
+                strcourse += "Course Information: " + "\n";
+                strcourse += "Course name: " + courseName + "\n";
                 strcourse += "Class room: " + c.getClassRoom() + "\n";
                 strcourse += "Teacher: " + c.getTeacher().getName() + "\n";
                 strcourse += "Students: " + "\n";

@@ -74,23 +74,35 @@ public class Runner {
 
                 case 2:
                     System.out.println("Courses:");
-                    university.printExistingCourses();
-                    //get size of courses array
-                    System.out.println(university.coursesSize());
-                    boolean backToMenu = false;
-                    while (!backToMenu) {
-                        System.out.println("\nEnter the course ID to see the information of the course: ");
-                        int courseId = scan.nextInt();
-                        System.out.println(courseId);
-                        String name = courseName(courseId);
-                        if (name != null || !name.equals("Course not found")) {
-                            System.out.println(university.showCourseInfo(name));
-                            backToMenu = true;
-                        } else {
-                            System.out.println("Course not found");
-                        }
+                    if (university.coursesSize() == 0) {
+                        System.out.println("There are no courses in the university");
+                        pressEnterToContinue();
                     }
-                    pressEnterToContinue();
+                    else {
+                        university.printExistingCourses();
+                        boolean backToMenu = false;
+                        while (!backToMenu) {
+                            System.out.println("\nEnter the course ID to see the information of the course: ");
+                            int courseId = scan.nextInt();
+                            boolean courseIDValidation = false;
+                            String name = courseName(courseId);
+                            while (!courseIDValidation) {
+                                if (name == "The course id is not valid") {
+                                    System.out.println(name);
+                                    System.out.println("Please enter a valid course ID: ");
+                                    courseId = scan.nextInt();
+                                    name = courseName(courseId);
+                                }
+                                else {
+                                    System.out.println(university.showCourseInfo(name));
+                                    backToMenu = true;
+                                    courseIDValidation = true;
+                                }
+
+                        }
+                                               }
+                        pressEnterToContinue();
+                    }
                     break;
 
 
@@ -136,7 +148,6 @@ public class Runner {
                     while (teacher == null) {
                         System.out.println("Teacher not found, please enter a valid ID");
                         teacherId = askTeacherId();
-                        System.out.println(teacherId);
                         teacher = university.getTeacherbyID(teacherId);
                     }
 
